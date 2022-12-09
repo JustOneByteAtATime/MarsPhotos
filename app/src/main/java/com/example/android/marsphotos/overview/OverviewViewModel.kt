@@ -46,12 +46,25 @@ class OverviewViewModel : ViewModel() {
      */
     private fun getMarsPhotos() {
         //*15 Inside getMarsPhotos(), launch the coroutine using viewModelScope.launch.
+        // Exception Handling 1. Open overview/OverviewViewModel.kt. Scroll down to the getMarsPhotos()
+        // method. Inside the launch block, add a try block around MarsApi call to handle exceptions.
+        // Add catch block after the try block:
         viewModelScope.launch{
             //*16 Inside viewModelScope, use the singleton object MarsApi, to call the getPhotos()
         // method from the RETROFITSERVICE interface. Save the returned response in a val called listResult.
-            val listResult = MarsApi.retrofitService.getPhotos()
-            //*17 Assign the result we just received from the backend server to the _status.value.
-            _status.value = listResult
+            try {
+                val listResult = MarsApi.retrofitService.getPhotos()
+                //*17 Assign the result we just received from the backend server to the _status.value.
+
+                // In the method getMarsPhotos(), listResult is a List<MarsPhoto> not a String
+                // anymore. The size of that list is the number of photos that were received and
+                // parsed. To print the number of photos retrieved update _status.value as follows.
+                _status.value = "Success: ${listResult.size} Mars photos retrieved"
+            } catch (e: Exception){
+                // Inside the catch {} block, handle the failure response. Display the error message
+            // to the user by setting the e.message to the _status.value.
+                _status.value = "Failure: ${e.message}"
+            }
         }
     }
 }
