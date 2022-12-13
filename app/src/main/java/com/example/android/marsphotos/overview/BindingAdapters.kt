@@ -68,4 +68,3 @@ fun bindStatus(statusImageView: ImageView, status: MarsApiStatus) {
         }
     }
 }
-
