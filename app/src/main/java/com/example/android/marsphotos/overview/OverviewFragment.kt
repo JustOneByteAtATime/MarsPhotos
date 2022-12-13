@@ -23,6 +23,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.android.marsphotos.databinding.FragmentOverviewBinding
+import com.example.android.marsphotos.databinding.GridViewItemBinding
 
 /**
  * This fragment shows the the status of the Mars photos web services transaction.
@@ -39,6 +40,21 @@ class OverviewFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        // 5.3 Open overview/OverviewFragment.kt. In the onCreateView() method, comment out the line
+        // that inflates the FragmentOverviewBinding class and assigns it to the binding variable.
+        // You will see errors due to removing this line. This is only temporary; you'll fix them later.
+
+
+
+        // 5.4 Use grid_view_item.xml instead of fragment_overview.xml. Add the following line to
+        // inflate the GridViewItemBinding class instead.
+
+        // 5.5 Revert the temporary changes you made in overview/OverviewFragment.kt. In the method
+        // onCreateview(), uncomment the line that inflates FragmentOverviewBinding. Delete or
+        // comment out the line that inflates GridViewIteMBinding.
+
+        // val binding = GridViewItemBinding.inflate(inflater)
+
         val binding = FragmentOverviewBinding.inflate(inflater)
 
         // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
@@ -46,6 +62,8 @@ class OverviewFragment : Fragment() {
 
         // Giving the binding access to the OverviewViewModel
         binding.viewModel = viewModel
+
+        binding.photosGrid.adapter = PhotoGridAdapter()
 
         return binding.root
     }

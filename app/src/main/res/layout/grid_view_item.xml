@@ -16,9 +16,24 @@
   ~ limitations under the License.
   -->
 
+<!-- text here -->
+
+<!-- 5.1 Above the <ImageView> element, add a <data> element for the data binding, and bind to the OverviewViewModel class: -->
+
+<!-- 5.2 Add an app:imageUrl attribute to the ImageView element to use the new image loading binding adapter.
+Remember that the photos contain a list MarsPhotos retrieved from the server. Assign the first entry
+URL to the imageUrl attribute. -->
+
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="photo"
+            type="com.example.android.marsphotos.network.MarsPhoto"
+            />
+    </data>
+
     <ImageView
         android:id="@+id/mars_image"
         android:layout_width="wrap_content"
@@ -26,5 +41,7 @@
         android:scaleType="fitXY"
         android:adjustViewBounds="true"
         android:padding="2dp"
-        tools:src="@tools:sample/backgrounds/scenic"/>
+        tools:src="@tools:sample/backgrounds/scenic"
+        app:imageUrl="@{photo.imgSrcUrl}"
+        />
 </layout>
